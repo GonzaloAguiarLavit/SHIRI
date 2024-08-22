@@ -1,18 +1,78 @@
-/* Estilos anteriores */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+}
 
 .meat-cards {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
+    justify-content: space-between;
 }
 
 .meat-card {
-    border: 1px solid #ddd;
+    width: 30%;
+    background-color: #eee;
     border-radius: 8px;
-    width: 150px;
     text-align: center;
+    padding: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .meat-card img {
@@ -20,9 +80,12 @@
     border-radius: 8px 8px 0 0;
 }
 
-.meat-card h3 {
-    margin: 0;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 0 0 8px 8px;
+.meat-card:hover {
+    background-color: #ccc;
+}
+
+#timer {
+    font-size: 48px;
+    margin: 20px 0;
+    text-align: center;
 }

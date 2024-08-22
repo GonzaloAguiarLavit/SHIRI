@@ -1,50 +1,61 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoreo de Cortes</title>
+    <title>Meat Cutting Monitor</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container" id="loginContainer">
-        <h1>Bienvenido</h1>
-        <label for="employeeName">Ingrese su nombre:</label>
-        <input type="text" id="employeeName" placeholder="Nombre">
-        <button id="saveNameButton">Guardar Nombre</button>
+    <nav>
+        <ul>
+            <li><a href="#" id="homeMenu">Home</a></li>
+            <li><a href="#" id="employeesMenu">Employees</a></li>
+            <li><a href="#" id="cutsMenu">Cuts</a></li>
+            <li><a href="#" id="reportsMenu">Reports</a></li>
+        </ul>
+    </nav>
 
-        <h2>O seleccione su nombre:</h2>
-        <select id="nameList">
-            <!-- Se llenará dinámicamente -->
-        </select>
-        <button id="selectNameButton">Seleccionar Nombre</button>
+    <div class="container" id="loginContainer">
+        <h1>Welcome</h1>
+        <label for="employeeName">Enter your name:</label>
+        <input type="text" id="employeeName" placeholder="Name">
+        <button id="saveNameButton">Save Name</button>
+
+        <h2>Or select your name:</h2>
+        <select id="nameList"></select>
+        <button id="selectNameButton">Select Name</button>
     </div>
 
     <div class="container" id="meatSelectionContainer" style="display:none;">
-        <h1>Seleccione el tipo de carne</h1>
+        <h1>Select Meat Type</h1>
         <div class="meat-cards">
-            <div class="meat-card" data-meat="Res">
-                <img src="res.jpg" alt="Res">
-                <h3>Res</h3>
+            <div class="meat-card" data-meat="Beef">
+                <img src="beef.jpg" alt="Beef">
+                <h3>Beef</h3>
             </div>
-            <div class="meat-card" data-meat="Cerdo">
-                <img src="cerdo.jpg" alt="Cerdo">
-                <h3>Cerdo</h3>
+            <div class="meat-card" data-meat="Pork">
+                <img src="pork.jpg" alt="Pork">
+                <h3>Pork</h3>
             </div>
-            <div class="meat-card" data-meat="Pollo">
-                <img src="pollo.jpg" alt="Pollo">
-                <h3>Pollo</h3>
+            <div class="meat-card" data-meat="Chicken">
+                <img src="chicken.jpg" alt="Chicken">
+                <h3>Chicken</h3>
             </div>
-            <!-- Puedes agregar más tarjetas aquí -->
         </div>
     </div>
 
     <div class="container" id="timerContainer" style="display:none;">
-        <h1>Corte: <span id="selectedMeat"></span></h1>
+        <h1>Cut: <span id="selectedMeat"></span></h1>
         <button id="startButton">Start</button>
         <button id="stopButton" disabled>Stop</button>
         <div id="timer">00:00:00</div>
-        <button id="backButton">Volver a la selección de carne</button>
+        <button id="backButton">Back to Meat Selection</button>
+    </div>
+
+    <div class="container" id="reportsContainer" style="display:none;">
+        <h1>Reports</h1>
+        <!-- Add report views here -->
     </div>
 
     <script src="script.js"></script>
