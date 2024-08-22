@@ -4,72 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meat Cutting Monitor</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .clock {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            border: 10px solid #333;
+            border-radius: 50%;
+        }
+        .circle {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 50%;
+        }
+        .hand {
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background-color: #333;
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+        }
+        #timer {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#" id="homeMenu">Home</a></li>
-            <li><a href="#" id="employeesMenu">Employees</a></li>
-            <li><a href="#" id="cutsMenu">Cuts</a></li>
-            <li><a href="#" id="reportsMenu">Reports</a></li>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><i class="fas fa-cut"></i> Meat Monitor</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="#" id="homeMenu">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" id="employeesMenu">Employees</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" id="cutsMenu">Cuts</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" id="reportsMenu">Reports</a></li>
         </ul>
-    </nav>
-
-    <!-- Home (Login) -->
-    <div class="container" id="loginContainer">
-        <h1>Select Your Name</h1>
-        <select id="nameList"></select>
-        <button id="selectNameButton">Select Name</button>
     </div>
+</nav>
 
-    <!-- Employees -->
-    <div class="container" id="employeesContainer" style="display:none;">
-        <h1>Employees</h1>
-        <ul id="employeesList"></ul>
-        <input type="text" id="newEmployeeName" placeholder="Add New Employee">
-        <button id="addEmployeeButton">Add Employee</button>
+<!-- Home (Employee selection) -->
+<div class="container animate__animated animate__fadeIn" id="loginContainer">
+    <h1 class="mb-4"><i class="fas fa-user"></i> Select Your Name</h1>
+    <div class="form-group">
+        <select id="nameList" class="form-control"></select>
     </div>
+    <button id="selectNameButton" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> Select Name</button>
+</div>
 
-    <!-- Cuts -->
-    <div class="container" id="cutsContainer" style="display:none;">
-        <h1>Cuts</h1>
-        <select id="categoryFilter">
+<!-- Employees -->
+<div class="container animate__animated animate__fadeIn" id="employeesContainer" style="display:none;">
+    <h1 class="mb-4"><i class="fas fa-users"></i> Employees</h1>
+    <ul id="employeesList" class="list-group mb-3"></ul>
+    <div class="input-group">
+        <input type="text" id="newEmployeeName" class="form-control" placeholder="Add New Employee">
+        <div class="input-group-append">
+            <button id="addEmployeeButton" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
+        </div>
+    </div>
+</div>
+
+<!-- Cuts -->
+<div class="container animate__animated animate__fadeIn" id="cutsContainer" style="display:none;">
+    <h1 class="mb-4"><i class="fas fa-utensils"></i> Cuts</h1>
+    <div class="form-group">
+        <select id="categoryFilter" class="form-control mb-3">
             <option value="all">All Categories</option>
             <option value="Meat">Meat</option>
             <option value="Chicken">Chicken</option>
             <option value="Fish">Fish</option>
         </select>
-        <ul id="cutsList"></ul>
-        <input type="text" id="newCutName" placeholder="Add New Cut">
-        <select id="newCutCategory">
+    </div>
+    <ul id="cutsList" class="list-group mb-3"></ul>
+    <div class="input-group">
+        <input type="text" id="newCutName" class="form-control" placeholder="Add New Cut">
+        <select id="newCutCategory" class="form-control">
             <option value="Meat">Meat</option>
             <option value="Chicken">Chicken</option>
             <option value="Fish">Fish</option>
         </select>
-        <button id="addCutButton">Add Cut</button>
-    </div>
-
-    <!-- Timer -->
-    <div class="container" id="timerContainer" style="display:none;">
-        <h1>Cut: <span id="selectedMeat"></span></h1>
-        <div class="clock">
-            <div class="circle">
-                <div class="hand"></div>
-            </div>
+        <div class="input-group-append">
+            <button id="addCutButton" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
         </div>
-        <div id="timer">00:00:00</div>
-        <button id="startButton">Start</button>
-        <button id="stopButton" disabled>Stop</button>
-        <button id="backButton">Back to Cuts</button>
     </div>
+</div>
 
-    <!-- Reports -->
-    <div class="container" id="reportsContainer" style="display:none;">
-        <h1>Reports</h1>
-        <div id="reportsContent"></div>
+<!-- Timer -->
+<div class="container animate__animated animate__fadeIn" id="timerContainer" style="display:none;">
+    <h1><i class="fas fa-stopwatch"></i> Cut: <span id="selectedMeat"></span></h1>
+    <div class="clock">
+        <div class="circle">
+            <div class="hand"></div>
+        </div>
     </div>
+    <div id="timer">00:00:00</div>
+    <button id="startButton" class="btn btn-primary btn-block"><i class="fas fa-play"></i> Start</button>
+    <button id="stopButton" class="btn btn-danger btn-block" disabled><i class="fas fa-stop"></i> Stop</button>
+    <button id="backButton" class="btn btn-secondary btn-block"><i class="fas fa-arrow-left"></i> Back to Cuts</button>
+</div>
 
-    <script src="script.js"></script>
+<!-- Reports -->
+<div class="container animate__animated animate__fadeIn" id="reportsContainer" style="display:none;">
+    <h1><i class="fas fa-chart-line"></i> Reports</h1>
+    <div id="reportsContent"></div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="script.js"></script>
 </body>
 </html>

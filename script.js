@@ -174,6 +174,12 @@ function generateReports() {
     const reportsContent = document.getElementById('reportsContent');
     reportsContent.innerHTML = '';
 
+    // Verificar si el historial está vacío
+    if (history.length === 0) {
+        reportsContent.innerHTML = '<p>No hay datos disponibles para generar reportes.</p>';
+        return;
+    }
+
     console.log("Generating reports with history:", history);
 
     // Agrupar entradas por día
@@ -184,7 +190,7 @@ function generateReports() {
 
     // Generar reportes por cada día
     for (const [day, entries] of Object.entries(groupedByDay)) {
-        let dayReport = `<h2>${day}</h2><table border="1"><tr><th>Employee</th><th>Cut</th><th>Start Time</th><th>End Time</th><th>Elapsed Time</th></tr>`;
+        let dayReport = `<h2>${day}</h2><table border="1"><tr><th>Empleado</th><th>Corte</th><th>Hora de Inicio</th><th>Hora de Fin</th><th>Tiempo Transcurrido</th></tr>`;
         let totalDayTime = 0;
 
         entries.forEach(entry => {
@@ -201,7 +207,7 @@ function generateReports() {
             </tr>`;
         });
 
-        dayReport += `<tr><td colspan="4">Total Work Time</td><td>${formatSeconds(totalDayTime)}</td></tr></table>`;
+        dayReport += `<tr><td colspan="4">Tiempo Total de Trabajo</td><td>${formatSeconds(totalDayTime)}</td></tr></table>`;
         reportsContent.innerHTML += dayReport;
     }
 }
@@ -219,12 +225,14 @@ function groupBy(array, keyGetter) {
     return map;
 }
 
+// Convertir segundos en formato horas, minutos, segundos
 function formatSeconds(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const remainingSeconds = seconds % 60;
     return `${hours}h ${minutes}m ${remainingSeconds}s`;
 }
+
 
 // Initialize
 showHome();
