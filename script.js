@@ -173,8 +173,13 @@ function generateReports() {
     const reportsContent = document.getElementById('reportsContent');
     reportsContent.innerHTML = '';
 
-    const groupedByDay = groupBy(history, entry => new Date(entry.startTime).toDateString());
+    // Agrupar entradas por día
+    const groupedByDay = groupBy(history, entry => {
+        const date = new Date(entry.startTime);
+        return date.toLocaleDateString();  // Agrupar por fecha
+    });
 
+    // Generar reportes por cada día
     for (const [day, entries] of Object.entries(groupedByDay)) {
         let dayReport = `<h2>${day}</h2><table border="1"><tr><th>Employee</th><th>Cut</th><th>Start Time</th><th>End Time</th><th>Elapsed Time</th></tr>`;
         let totalDayTime = 0;
@@ -187,7 +192,7 @@ function generateReports() {
             dayReport += `<tr>
                 <td>${entry.employee}</td>
                 <td>${entry.meat}</td>
-                <td>${entry.startTime}</td>
+                <td>${new Date(entry.startTime).toLocaleTimeString()}</td>
                 <td>${entry.endTime}</td>
                 <td>${entry.elapsedTime}</td>
             </tr>`;
@@ -197,7 +202,6 @@ function generateReports() {
         reportsContent.innerHTML += dayReport;
     }
 }
-
 function groupBy(array, keyGetter) {
     const map = {};
     array.forEach(item => {
