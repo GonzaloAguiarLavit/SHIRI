@@ -1,52 +1,28 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+/* Estilos anteriores */
+
+.meat-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.meat-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 150px;
     text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1, h2 {
-    color: #333;
-}
-
-label, select, button {
-    margin: 10px 0;
-    font-size: 18px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
     cursor: pointer;
 }
 
-button:disabled {
-    background-color: #ccc;
-}
-
-#timer {
-    font-size: 48px;
-    margin: 20px 0;
-}
-
-table {
+.meat-card img {
     width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
+    border-radius: 8px 8px 0 0;
 }
 
-th, td {
+.meat-card h3 {
+    margin: 0;
     padding: 10px;
-    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    border-radius: 0 0 8px 8px;
 }

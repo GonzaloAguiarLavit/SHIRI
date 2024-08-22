@@ -1,6 +1,66 @@
 let startTime;
 let timerInterval;
+let currentEmployee;
 
+// Manejar la pantalla de inicio
+document.getElementById('saveNameButton').addEventListener('click', function() {
+    const nameInput = document.getElementById('employeeName').value;
+    if (nameInput) {
+        saveName(nameInput);
+        loadNameList();
+        alert("Nombre guardado. Selecciónelo de la lista.");
+        document.getElementById('employeeName').value = '';
+    }
+});
+
+document.getElementById('selectNameButton').addEventListener('click', function() {
+    const selectedName = document.getElementById('nameList').value;
+    if (selectedName) {
+        currentEmployee = selectedName;
+        showMeatSelection();
+    }
+});
+
+function saveName(name) {
+    let names = localStorage.getItem('names') ? JSON.parse(localStorage.getItem('names')) : [];
+    if (!names.includes(name)) {
+        names.push(name);
+        localStorage.setItem('names', JSON.stringify(names));
+    }
+}
+
+function loadNameList() {
+    const nameList = document.getElementById('nameList');
+    nameList.innerHTML = ''; // Limpiar la lista
+    let names = localStorage.getItem('names') ? JSON.parse(localStorage.getItem('names')) : [];
+    names.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        nameList.appendChild(option);
+    });
+}
+
+function showMeatSelection() {
+    document.getElementById('loginContainer').style.display = 'none';
+    document.getElementById('meatSelectionContainer').style.display = 'block';
+}
+
+// Manejar la selección de carne
+document.querySelectorAll('.meat-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const selectedMeat = this.getAttribute('data-meat');
+        document.getElementById('selectedMeat').textContent = selectedMeat;
+        showTimerScreen();
+    });
+});
+
+function showTimerScreen() {
+    document.getElementById('meatSelectionContainer').style.display = 'none';
+    document.getElementById('timerContainer').style.display = 'block';
+}
+
+// Manejar el cronómetro
 document.getElementById('startButton').addEventListener('click', function() {
     startTime = new Date();
     this.disabled = true;
@@ -15,10 +75,14 @@ document.getElementById('stopButton').addEventListener('click', function() {
 
     const endTime = new Date();
     const elapsedTime = formatTime(new Date(endTime - startTime));
-    const meatType = document.getElementById('meatType').value;
-    const employeeName = prompt("Ingrese su nombre:");
+    const meatType = document.getElementById('selectedMeat').textContent;
     
-    addRowToHistory(employeeName, meatType, elapsedTime);
+    addRowToHistory(currentEmployee, meatType, elapsedTime);
+    showMeatSelection();
+});
+
+document.getElementById('backButton').addEventListener('click', function() {
+    showMeatSelection();
 });
 
 function startTimer() {
@@ -48,3 +112,6 @@ function addRowToHistory(employee, meat, time) {
     meatCell.textContent = meat;
     timeCell.textContent = time;
 }
+
+// Inicializar la lista de nombres
+loadNameList();

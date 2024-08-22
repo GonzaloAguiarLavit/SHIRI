@@ -7,33 +7,44 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Monitoreo de Cortes de Carne</h1>
-        <label for="meatType">Seleccione el tipo de carne:</label>
-        <select id="meatType">
-            <option value="Res">Res</option>
-            <option value="Cerdo">Cerdo</option>
-            <option value="Pollo">Pollo</option>
-            <!-- Puedes agregar más opciones aquí -->
+    <div class="container" id="loginContainer">
+        <h1>Bienvenido</h1>
+        <label for="employeeName">Ingrese su nombre:</label>
+        <input type="text" id="employeeName" placeholder="Nombre">
+        <button id="saveNameButton">Guardar Nombre</button>
+
+        <h2>O seleccione su nombre:</h2>
+        <select id="nameList">
+            <!-- Se llenará dinámicamente -->
         </select>
+        <button id="selectNameButton">Seleccionar Nombre</button>
+    </div>
+
+    <div class="container" id="meatSelectionContainer" style="display:none;">
+        <h1>Seleccione el tipo de carne</h1>
+        <div class="meat-cards">
+            <div class="meat-card" data-meat="Res">
+                <img src="res.jpg" alt="Res">
+                <h3>Res</h3>
+            </div>
+            <div class="meat-card" data-meat="Cerdo">
+                <img src="cerdo.jpg" alt="Cerdo">
+                <h3>Cerdo</h3>
+            </div>
+            <div class="meat-card" data-meat="Pollo">
+                <img src="pollo.jpg" alt="Pollo">
+                <h3>Pollo</h3>
+            </div>
+            <!-- Puedes agregar más tarjetas aquí -->
+        </div>
+    </div>
+
+    <div class="container" id="timerContainer" style="display:none;">
+        <h1>Corte: <span id="selectedMeat"></span></h1>
         <button id="startButton">Start</button>
         <button id="stopButton" disabled>Stop</button>
-
         <div id="timer">00:00:00</div>
-
-        <h2>Historial</h2>
-        <table id="historyTable">
-            <thead>
-                <tr>
-                    <th>Empleado</th>
-                    <th>Tipo de Carne</th>
-                    <th>Tiempo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí se agregan las filas dinámicamente -->
-            </tbody>
-        </table>
+        <button id="backButton">Volver a la selección de carne</button>
     </div>
 
     <script src="script.js"></script>
