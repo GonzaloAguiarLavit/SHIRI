@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoreo de Cortes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Monitoreo de Cortes de Carne</h1>
+        <label for="meatType">Seleccione el tipo de carne:</label>
+        <select id="meatType">
+            <option value="Res">Res</option>
+            <option value="Cerdo">Cerdo</option>
+            <option value="Pollo">Pollo</option>
+            <!-- Puedes agregar más opciones aquí -->
+        </select>
+        <button id="startButton">Start</button>
+        <button id="stopButton" disabled>Stop</button>
+
+        <div id="timer">00:00:00</div>
+
+        <h2>Historial</h2>
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>Empleado</th>
+                    <th>Tipo de Carne</th>
+                    <th>Tiempo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se agregan las filas dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
