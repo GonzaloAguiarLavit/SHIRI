@@ -194,7 +194,7 @@ function generateReports() {
 
     // Generar reportes por cada día
     for (const [day, entries] of Object.entries(groupedByDay)) {
-        let dayReport = `<h2>${day}</h2><table border="1"><tr><th>Empleado</th><th>Corte</th><th>Hora de Inicio</th><th>Hora de Fin</th><th>Tiempo Transcurrido</th></tr>`;
+        let dayReport = `<h2>${day}</h2><table class="table table-bordered"><tr><th>Empleado</th><th>Corte</th><th>Hora de Inicio</th><th>Hora de Fin</th><th>Tiempo Transcurrido</th></tr>`;
         let totalDayTime = 0;
 
         entries.forEach(entry => {
