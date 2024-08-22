@@ -10,7 +10,7 @@ let cuts = JSON.parse(localStorage.getItem('cuts')) || [
     { name: 'Salmon', category: 'Fish' }
 ];
 
-// Navigation
+// Navegación
 document.getElementById('homeMenu').addEventListener('click', showHome);
 document.getElementById('employeesMenu').addEventListener('click', showEmployees);
 document.getElementById('cutsMenu').addEventListener('click', showCuts);
@@ -20,7 +20,7 @@ function hideAllContainers() {
     document.querySelectorAll('.container').forEach(container => container.style.display = 'none');
 }
 
-// Show Home (Employee selection)
+// Mostrar Home (selección de empleado)
 function showHome() {
     hideAllContainers();
     loadNameList();
@@ -43,7 +43,7 @@ document.getElementById('selectNameButton').addEventListener('click', function()
     showCuts();
 });
 
-// Show Employees
+// Mostrar Empleados
 function showEmployees() {
     hideAllContainers();
     document.getElementById('employeesContainer').style.display = 'block';
@@ -66,12 +66,12 @@ document.getElementById('addEmployeeButton').addEventListener('click', function(
         employees.push(newEmployeeName);
         localStorage.setItem('employees', JSON.stringify(employees));
         loadEmployees();
-        loadNameList();  // Update the name list in Home
+        loadNameList();  // Actualizar la lista de nombres en Home
         document.getElementById('newEmployeeName').value = '';
     }
 });
 
-// Show Cuts (Categories: Meat, Chicken, Fish)
+// Mostrar Cortes (Categorías: Carne, Pollo, Pescado)
 function showCuts() {
     hideAllContainers();
     document.getElementById('cutsContainer').style.display = 'block';
@@ -107,7 +107,7 @@ document.getElementById('addCutButton').addEventListener('click', function() {
 
 document.getElementById('categoryFilter').addEventListener('change', loadCuts);
 
-// Start Cut Timer
+// Iniciar Cronómetro para el corte seleccionado
 function startCutTimer(cutName) {
     document.getElementById('selectedMeat').textContent = cutName;
     hideAllContainers();
@@ -138,6 +138,7 @@ function formatTime(time) {
     return `${hours}:${minutes}:${seconds}`;
 }
 
+// Detener el cronómetro y guardar la entrada
 document.getElementById('stopButton').addEventListener('click', function() {
     clearInterval(timerInterval);
 
@@ -156,14 +157,17 @@ document.getElementById('stopButton').addEventListener('click', function() {
     history.push(newEntry);
     localStorage.setItem('history', JSON.stringify(history));
 
-    // Debugging: Verify that the data is being stored correctly
+    // Confirmación visual
+    alert("Nueva entrada guardada correctamente.");
+
+    // Mostrar historial en la consola para depuración
     console.log("New entry added to history:", newEntry);
     console.log("Current history:", history);
 
     showCuts();
 });
 
-// Show Reports
+// Mostrar Reportes
 function showReports() {
     hideAllContainers();
     document.getElementById('reportsContainer').style.display = 'block';
@@ -233,6 +237,5 @@ function formatSeconds(seconds) {
     return `${hours}h ${minutes}m ${remainingSeconds}s`;
 }
 
-
-// Initialize
+// Inicializar la aplicación
 showHome();
