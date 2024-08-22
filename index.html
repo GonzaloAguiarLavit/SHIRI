@@ -16,46 +16,58 @@
         </ul>
     </nav>
 
+    <!-- Home (Login) -->
     <div class="container" id="loginContainer">
-        <h1>Welcome</h1>
-        <label for="employeeName">Enter your name:</label>
-        <input type="text" id="employeeName" placeholder="Name">
-        <button id="saveNameButton">Save Name</button>
-
-        <h2>Or select your name:</h2>
+        <h1>Select Your Name</h1>
         <select id="nameList"></select>
         <button id="selectNameButton">Select Name</button>
     </div>
 
-    <div class="container" id="meatSelectionContainer" style="display:none;">
-        <h1>Select Meat Type</h1>
-        <div class="meat-cards">
-            <div class="meat-card" data-meat="Beef">
-                <img src="beef.jpg" alt="Beef">
-                <h3>Beef</h3>
-            </div>
-            <div class="meat-card" data-meat="Pork">
-                <img src="pork.jpg" alt="Pork">
-                <h3>Pork</h3>
-            </div>
-            <div class="meat-card" data-meat="Chicken">
-                <img src="chicken.jpg" alt="Chicken">
-                <h3>Chicken</h3>
-            </div>
-        </div>
+    <!-- Employees -->
+    <div class="container" id="employeesContainer" style="display:none;">
+        <h1>Employees</h1>
+        <ul id="employeesList"></ul>
+        <input type="text" id="newEmployeeName" placeholder="Add New Employee">
+        <button id="addEmployeeButton">Add Employee</button>
     </div>
 
+    <!-- Cuts -->
+    <div class="container" id="cutsContainer" style="display:none;">
+        <h1>Cuts</h1>
+        <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="Meat">Meat</option>
+            <option value="Chicken">Chicken</option>
+            <option value="Fish">Fish</option>
+        </select>
+        <ul id="cutsList"></ul>
+        <input type="text" id="newCutName" placeholder="Add New Cut">
+        <select id="newCutCategory">
+            <option value="Meat">Meat</option>
+            <option value="Chicken">Chicken</option>
+            <option value="Fish">Fish</option>
+        </select>
+        <button id="addCutButton">Add Cut</button>
+    </div>
+
+    <!-- Timer -->
     <div class="container" id="timerContainer" style="display:none;">
         <h1>Cut: <span id="selectedMeat"></span></h1>
+        <div class="clock">
+            <div class="circle">
+                <div class="hand"></div>
+            </div>
+        </div>
+        <div id="timer">00:00:00</div>
         <button id="startButton">Start</button>
         <button id="stopButton" disabled>Stop</button>
-        <div id="timer">00:00:00</div>
-        <button id="backButton">Back to Meat Selection</button>
+        <button id="backButton">Back to Cuts</button>
     </div>
 
+    <!-- Reports -->
     <div class="container" id="reportsContainer" style="display:none;">
         <h1>Reports</h1>
-        <!-- Add report views here -->
+        <div id="reportsContent"></div>
     </div>
 
     <script src="script.js"></script>
