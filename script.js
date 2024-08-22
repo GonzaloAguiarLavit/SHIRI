@@ -171,70 +171,45 @@ document.getElementById('stopButton').addEventListener('click', function() {
 function showReports() {
     hideAllContainers();
     document.getElementById('reportsContainer').style.display = 'block';
-    generateReports();
+    displayHistory();
 }
 
-function generateReports() {
+// Mostrar la tabla de historial de entradas
+function displayHistory() {
     const reportsContent = document.getElementById('reportsContent');
-    reportsContent.innerHTML = '';
+    reportsContent.innerHTML = `
+        <h2>Historial de Entradas</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Empleado</th>
+                    <th>Corte</th>
+                    <th>Hora de Inicio</th>
+                    <th>Hora de Fin</th>
+                    <th>Tiempo Transcurrido</th>
+                </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+        </table>
+    `;
 
-    // Verificar si el historial está vacío
+    const historyTableBody = document.getElementById('historyTableBody');
+
     if (history.length === 0) {
-        reportsContent.innerHTML = '<p>No hay datos disponibles para generar reportes.</p>';
-        return;
-    }
-
-    console.log("Generating reports with history:", history);
-
-    // Agrupar entradas por día
-    const groupedByDay = groupBy(history, entry => {
-        const date = new Date(entry.startTime);
-        return date.toLocaleDateString();  // Agrupar por fecha
-    });
-
-    // Generar reportes por cada día
-    for (const [day, entries] of Object.entries(groupedByDay)) {
-        let dayReport = `<h2>${day}</h2><table class="table table-bordered"><tr><th>Empleado</th><th>Corte</th><th>Hora de Inicio</th><th>Hora de Fin</th><th>Tiempo Transcurrido</th></tr>`;
-        let totalDayTime = 0;
-
-        entries.forEach(entry => {
-            const timeParts = entry.elapsedTime.split(':');
-            const totalSeconds = (+timeParts[0] * 3600) + (+timeParts[1] * 60) + (+timeParts[2]);
-            totalDayTime += totalSeconds;
-
-            dayReport += `<tr>
+        historyTableBody.innerHTML = '<tr><td colspan="5">No hay entradas en el historial.</td></tr>';
+    } else {
+        history.forEach(entry => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
                 <td>${entry.employee}</td>
                 <td>${entry.meat}</td>
                 <td>${new Date(entry.startTime).toLocaleTimeString()}</td>
                 <td>${entry.endTime}</td>
                 <td>${entry.elapsedTime}</td>
-            </tr>`;
+            `;
+            historyTableBody.appendChild(row);
         });
-
-        dayReport += `<tr><td colspan="4">Tiempo Total de Trabajo</td><td>${formatSeconds(totalDayTime)}</td></tr></table>`;
-        reportsContent.innerHTML += dayReport;
     }
-}
-
-// Agrupar entradas de historial por una clave específica (por ejemplo, día)
-function groupBy(array, keyGetter) {
-    const map = {};
-    array.forEach(item => {
-        const key = keyGetter(item);
-        if (!map[key]) {
-            map[key] = [];
-        }
-        map[key].push(item);
-    });
-    return map;
-}
-
-// Convertir segundos en formato horas, minutos, segundos
-function formatSeconds(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = seconds % 60;
-    return `${hours}h ${minutes}m ${remainingSeconds}s`;
 }
 
 // Inicializar la aplicación
